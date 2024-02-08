@@ -1,0 +1,31 @@
+:root {
+  --max-width-screen-1280: 1140px;
+  --max-width-screen-1140: 1024px;
+  --max-width-screen-1024: 768px;
+  --max-width-screen-768: 668px;
+  --max-width-screen-480px: 320px;
+  --max-width-screen-320px: 284px;
+  --font-weight: 400;
+  --text-color: rgba(255, 255, 255, 1);
+  --text-color-dark: rgba(0, 0, 0, 1);
+  --title-font-size: 50px;
+  --title-line-height: 58px;
+  --subtitle-font-size: 20px;
+  --subtitle-line-height: 26.63px;
+  --button-font-size: 12px;
+  --paragraph-font-size: 13px;
+  --letter-spacing: -.044em;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Arial', sans-serif;
+  scroll-behavior: smooth;
+}
+
+
+.page {
+  margin: 0 auto;
+}

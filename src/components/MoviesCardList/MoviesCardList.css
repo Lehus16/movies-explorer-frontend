@@ -1,0 +1,107 @@
+.movies-card-list__container {
+    width: 100%;
+}
+
+.movies-card-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 70px 0 30px;
+}
+
+.movies-card-list_saved {
+    padding-bottom: 165px;
+}
+
+.movies-card-list__button-container {
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.movies-card-list__button {
+    border: none;
+    background-color: rgba(249, 249, 249, 1);
+    cursor: pointer;
+    padding: 11px 0 9px;
+    width: 100%;
+    margin: 50px 0 80px;
+    font-size: 12px;
+    line-height: 14.52px;
+    border-radius: 6px;
+    transition: .4s;
+    -webkit-transition: .4s;
+    -moz-transition: .4s;
+    -ms-transition: .4s;
+    -o-transition: .4s;
+}
+
+.movies-card-list__button:hover {
+    background-color: rgba(220, 220, 220, 1);
+}
+
+/* Media queries */
+
+/* 1140px */
+@media screen and (max-width: 1140px) {
+    .movies-card-list {
+        max-width: 1024px;
+    }
+
+    .movies-card-list__button-container {
+        max-width: 1024px;
+    }
+
+}
+
+/* 1024px */
+@media screen and (max-width: 1024px) {
+    .movies-card-list {
+        max-width: 768px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 36px 30px;
+    }
+
+    .movies-card-list__button-container {
+        max-width: 768px;
+    }
+}
+
+
+/* 768px */
+@media screen and (max-width: 768px) {
+    .movies-card-list {
+        max-width: 708px;
+    }
+
+    .movies-card-list__button-container {
+        max-width: 708px;
+    }
+}
+
+/* 480px */
+@media screen and (max-width: 480px) {
+    .movies-card-list {
+        max-width: 400px;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .movies-card-list__button-container {
+        max-width: 400px;
+    }
+}
+
+/* 320px */
+
+@media screen and (max-width: 320px) {
+    .movies-card-list {
+        max-width: 300px;
+        padding: 40px 0 30px;
+    }
+
+    .movies-card-list__button-container {
+        max-width: 300px;
+    }
+}
