@@ -10,7 +10,7 @@ function SearchForm({ onFilterChange }) {
         console.log('Форма отправлена');
     }
     return (
-        <div className='search-form__wrapper'>
+        <div className='search-form-wrapper'>
             <form className='search-form'>
                 <img className='search-form__search-icon' src={searchIcon} alt='Иконка поиска' />
                 <input

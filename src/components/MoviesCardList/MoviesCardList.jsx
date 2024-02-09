@@ -54,16 +54,16 @@ function MoviesCardList({ cards, isLoading, shortMovies, isMoviesShort }) {
     }
 
     return (
-        <section className='movies-card-list__container'>
+        <section className='movies-card-list'>
             {isLoading
                 ? <Preloader />
                 : location.pathname === "/movies"
-                    ? <div className='movies-card-list'>
+                    ? <div className='movies-card-list__container'>
                         {isMoviesShort ? shortMovies.slice(cardsConstants.ZERO, cardsCount).map((card) => <MoviesCard key={card.movieId} card={card} />)
                             : cards.slice(cardsConstants.ZERO, cardsCount).map((card) => <MoviesCard
                                 key={card.movieId} card={card} />)}
                     </div>
-                    : <div className='movies-card-list movies-card-list_saved'>
+                    : <div className='movies-card-list__container movies-card-list__container_type_saved'>
                         {isMoviesShort ? shortMovies.slice(cardsConstants.ZERO, cardsCount).map((card) => <MoviesCard key={card.movieId} card={card} />)
                             : cards.slice(cardsConstants.ZERO, cardsCount).map((card) => <MoviesCard
                                 key={card.movieId} card={card} />)}

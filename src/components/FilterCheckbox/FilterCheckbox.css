@@ -1,8 +1,8 @@
-.filter-checkbox__wrapper {
+.filter-checkbox {
     display: flex;
 }
 
-.filter-checkbox {
+.filter-checkbox__input {
     display: none;
 }
 
@@ -45,12 +45,12 @@
     -o-transition: 0.4s;
 }
 
-.filter-checkbox:checked+.filter-checkbox__slider {
+.filter-checkbox__input:checked+.filter-checkbox__slider {
     background-color: rgba(43, 224, 128, 1);
 }
 
 
-.filter-checkbox:checked+.filter-checkbox__slider::before {
+.filter-checkbox__input:checked+.filter-checkbox__slider::before {
     transform: translateX(16px);
     -webkit-transform: translateX(16px);
     -moz-transform: translateX(16px);

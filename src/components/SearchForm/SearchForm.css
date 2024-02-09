@@ -1,4 +1,4 @@
-.search-form__wrapper {
+.search-form-wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -60,7 +60,7 @@
 /* 768px */
 
 @media screen and (max-width: 768px) {
-    .search-form__wrapper {
+    .search-form-wrapper {
         max-width: var(--max-width-screen-768);
         margin: 86px auto 61px;
     }
@@ -74,7 +74,7 @@
 /* 480px */
 
 @media screen and (max-width: 480px) {
-    .search-form__wrapper {
+    .search-form-wrapper {
         max-width: var(--max-width-screen-320);
         margin: 98px auto 50px;
     }

@@ -39,15 +39,15 @@
     -o-transition: .4s;
 }
 
-.movies-card__save-button_active {
+.movies-card__button_type_active {
     background-image: url('../../images/isMovieSaved.svg');
 }
 
-.movies-card__save-button_unactive {
+.movies-card__button_type_unactive {
     background-image: url('../../images/movieSaveButton.svg');
 }
 
-.movie-card__delete-button {
+.movies-card__button_type_delete {
     background-image: url('../../images/movieDeleteButton.svg');
     margin-top: 5px;
 }

@@ -26,10 +26,11 @@ function MoviesCard({ card }) {
                     </p>
                 </div>
                 {location.pathname === '/movies' ?
-                    <button onClick={isAdded ? onMovieDelete : onMovieSave} className={`movies-card__button ${isAdded ? 'movies-card__save-button_active' : 'movies-card__save-button_unactive'}`} type='button'>
+                    <button onClick={isAdded ? onMovieDelete : onMovieSave} className={`movies-card__button ${isAdded ? 'movies-card__button_type_active' : 'movies-card__button_type_unactive'}`} type='button'>
                     </button>
                     : location.pathname === '/saved-movies' &&
-                    <button type='button' className='movies-card__button movie-card__delete-button'>
+                    <button type='button'
+                        className='movies-card__button movies-card__button_type_delete'>
                     </button>}
 
             </figcaption>
