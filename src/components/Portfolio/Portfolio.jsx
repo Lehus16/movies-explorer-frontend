@@ -1,5 +1,6 @@
 import React from 'react'
 import './Portfolio.css';
+import arrowIcon from '../../images/arrowIcon.svg';
 
 function Portfolio() {
     return (
@@ -7,15 +8,15 @@ function Portfolio() {
             <h2 className="portfolio__title">Портфолио</h2>
             <a className="portfolio__link" target="_blank" rel="noopener noreferrer" href="https://github.com/Lehus16/how-to-learn">
                 Статичный сайт
-                <p>&#129125;</p>
+                <img className="portfolio__arrow" alt='Стрелка' src={arrowIcon} />
             </a>
             <a className="portfolio__link" target="_blank" rel="noopener noreferrer" href="https://github.com/Lehus16/RussainTravel.YandexPracticum">
                 Адаптивный сайт
-                <p>&#129125;</p>
+                <img className="portfolio__arrow" alt='Стрелка' src={arrowIcon} />
             </a>
             <a className="portfolio__link" target="_blank" rel="noopener noreferrer" href="https://github.com/Lehus16/react-mesto-api-full-gha">
                 Одностраничное приложение
-                <p>&#129125;</p>
+                <img className="portfolio__arrow" alt='Стрелка' src={arrowIcon} />
             </a>
         </div>
     )

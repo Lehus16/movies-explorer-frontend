@@ -24,12 +24,13 @@ const Header = ({ loggedIn }) => {
                         (<div className="header__container header__unauth-container">
                             <Logo className={"header__logo"} />
                             <nav>
-                                <Link to="/signup" className="header__sign-up-button_path_main">
+                                <Link to="/signup" className="header__sign-up-button header__sign-up-button_path_main">
                                     Регистрация
                                 </Link>
                                 <Link to="/signin" className="header__sign-in-button">
                                     Войти
                                 </Link>
+                                
                             </nav>
                         </div>)
                         : (<div className="header__container header__auth-container">
@@ -58,42 +59,30 @@ const Header = ({ loggedIn }) => {
 
                 </div>) :
                 (<div className="header" >
-                    {loggedIn ?
-                        (<div className="header__container header__unauth-container">
+                    <div className="header__container header__auth-container">
+                        <nav className="header__nav-container">
                             <Logo className={"header__logo"} />
-                            <nav>
-                                <Link to="/signup" className="header__sign-up-button">
-                                    Регистрация
-                                </Link>
-                                <Link to="/signin" className="header__sign-in-button">
-                                    Войти
-                                </Link>
-                            </nav>
-                        </div>)
-                        : (<div className="header__container header__auth-container">
-                            <nav className="header__nav-container">
-                                <Logo className={"header__logo"} />
-                                <NavLink to="/movies" className={`header__movies-button ${location.pathname === '/movies' && "header__movies-button_path_movies"}`}>
-                                    Фильмы
-                                </NavLink>
-                                <NavLink to="/saved-movies" className={`header__saved-movies-button
+                            <NavLink to="/movies" className={`header__movies-button ${location.pathname === '/movies' && "header__movies-button_path_movies"}`}>
+                                Фильмы
+                            </NavLink>
+                            <NavLink to="/saved-movies" className={`header__saved-movies-button
                                 ${location.pathname === '/saved-movies' && "header__saved-movies-button_path_saved-movies"}`}>
-                                    Сохранённые фильмы
-                                </NavLink>
-                            </nav>
-                            <Link to="/profile" className="header__profile-button">
-                                <p className="header__profile-text">
-                                    Аккаунт
-                                </p>
-                                <img src={profileLogo} alt="Логотип" className="header__profile-logo" />
-                            </Link>
-                            <button
-                                className={`header__burger-button ${isBurgerMenuOpen && "header__burger-button_active"}`}
-                                onClick={toggleBurgerMenu} type="button">
-                                <img className="header__burger-icon" src={burgerMenuIcon} alt="Меню" />
-                            </button>
-                        </div>)
-                    }
+                                Сохранённые фильмы
+                            </NavLink>
+                        </nav>
+                        <Link to="/profile" className="header__profile-button">
+                            <p className="header__profile-text">
+                                Аккаунт
+                            </p>
+                            <img src={profileLogo} alt="Логотип" className="header__profile-logo" />
+                        </Link>
+                        <button
+                            className={`header__burger-button ${isBurgerMenuOpen && "header__burger-button_active"}`}
+                            onClick={toggleBurgerMenu} type="button">
+                            <img className="header__burger-icon" src={burgerMenuIcon} alt="Меню" />
+                        </button>
+                    </div>
+
 
                 </div>)
             }

@@ -43,6 +43,7 @@
     margin-top: 156px;
     font-size: 14px;
     line-height: 16.94px;
+    cursor: pointer;
 }
 
 .login__button_unactive {
@@ -50,9 +51,6 @@
     cursor: default;
 }
 
-.login__button:focus {
-    outline: 2px solid rgba(43, 224, 128, 1);
-}
 
 .login__button:hover {
     opacity: .8;
@@ -67,16 +65,20 @@
     line-height: 15.73px;
 }
 
+.login__input:hover {
+    background-color: rgba(229, 229, 229, 1);
+}
+
 .login__input:focus {
     outline: 2px solid rgba(43, 224, 128, 1);
 }
 
-.login__input-error {
+.login__input_type_error {
     color: rgba(238, 52, 101, 1);
     outline: 1px solid rgba(238, 52, 101, 1);
 }
 
-.login__input-error:focus {
+.login__input_type_error:focus {
     outline: 2px solid rgba(238, 52, 101, 1);
 }
 

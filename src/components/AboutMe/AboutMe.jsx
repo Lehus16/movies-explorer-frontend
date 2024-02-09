@@ -1,5 +1,6 @@
 import React from "react";
 import "./AboutMe.css";
+import myPhoto from '../../images/myPhoto.jpg'
 
 
 function AboutMe() {
@@ -17,12 +18,12 @@ function AboutMe() {
                         Фронтенд-разработчик, 28 лет
                     </p>
                     <p className="about-me__paragraph">
-                        Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена
-                        и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
+                        Меня зовут Алексей, мне 28 лет, я родился в Москве. Люблю музыку и frontend. Закончил МГКИЭТ по специальности "Информационные технологии". Прошёл курс "Веб-разработчик" на Яндекс.Практикум. Работаю веб разработчиком и параллельно изучаю новые технологии.
                     </p>
                     <a className="about-me__link" href="https://github.com/Lehus16" target="_blank" rel="noopener noreferrer">Github</a>
                 </div>
-                <div className="about-me__photo"></div>
+                <img className="about-me__image" src={myPhoto} alt="Алексей" />
+
             </div>
         </section>
     )

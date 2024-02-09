@@ -1,13 +1,17 @@
 .register {
     display: flex;
-    width: 100%;
     flex-direction: column;
     align-items: center;
-    padding: 70px 0;
 }
 
 .register__form-container {
-    max-width: 396px;
+    padding: 70px 0;
+}
+
+.register__form {
+    width: 396px;
+    display: flex;
+    flex-direction: column;
 }
 
 .register__logo {
@@ -42,7 +46,6 @@
 
 .register__validation-text {
     display: block;
-    /* max-width: 80%; */
     text-wrap: pretty;
     height: 12px;
     color: rgba(238, 52, 101, 1);
@@ -52,7 +55,6 @@
 }
 
 .register__input {
-    width: 396px;
     border: none;
     background-color: rgba(249, 249, 249, 1);
     padding: 15px;
@@ -60,39 +62,28 @@
     color: rgba(0, 0, 0, 1);
     font-size: 13px;
     line-height: 15.73px;
-}
 
-.register__input::placeholder {
-    color: rgba(0, 0, 0, 1);
-    font-size: 13px;
-    line-height: 15.73px;
-}
-
-.register__input-error {
-    color: rgba(238, 52, 101, 1);
-    font-size: 13px;
-    line-height: 15.73px;
-    outline: 2px solid rgba(238, 52, 101, 1);
-}
-
-.register__input-error::placeholder {
-    color: rgba(238, 52, 101, 1);
-    font-size: 13px;
-    line-height: 15px;
 }
 
 .register__input:focus {
     outline: 2px solid rgba(43, 224, 128, 1);
 }
 
-.register__input-error:focus {
+.register__input:hover {
+    background-color: rgba(229, 229, 229, 1);
+}
+
+.register__input_type_error {
+    color: rgba(238, 52, 101, 1);
     outline: 2px solid rgba(238, 52, 101, 1);
 }
 
-
+.register__input_type_error:focus {
+    outline: 2px solid rgba(238, 52, 101, 1);
+}
 
 .register__button {
-    width: 396px;
+    width: 100%;
     border: none;
     border-radius: 3px;
     background-color: rgba(255, 104, 56, 1);
@@ -103,9 +94,8 @@
     font-size: 14px;
     line-height: 16.94px;
 }
-.register__button:focus {
-    outline: 2px solid rgba(43, 224, 128, 1);
-}
+
+
 .register__button_unactive {
     background-color: rgba(160, 160, 160, .5);
     cursor: default;
@@ -145,7 +135,7 @@
 /* 768px */
 
 @media screen and (max-width: 768px) {
-    .register {
+    .register__form-container {
         padding: 232px 0;
     }
 }
@@ -153,8 +143,8 @@
 /* 480px */
 
 @media screen and (max-width: 480px) {
-    .register {
-        padding: 56px 30px;
+    .register__form-container {
+        padding: 56px 0 30px;
     }
 
     .register__form-container {

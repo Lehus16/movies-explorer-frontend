@@ -1,5 +1,5 @@
 .about-project {
-    max-width: 1140px;
+    max-width: var(--max-width-screen-1280);
     margin: 0 auto;
     padding: 110px 0 0 0;
 }
@@ -70,26 +70,11 @@
 
 /* Media queries */
 
-/* 1140px */
-@media screen and (max-width: 1140px) {
-    .about-project {
-        max-width: 1024px;
-    }
-}
-
-
-/* 1024px */
-@media screen and (max-width: 1024px) {
-    .about-project {
-        max-width: 768px;
-    }
-
-}
 
 /* 768px */
 @media screen and (max-width: 768px) {
     .about-project {
-        max-width: 668px;
+        max-width: calc(var(--max-width-screen-768) - 40px);
         padding: 90px 0 0 0;
     }
 
@@ -120,7 +105,7 @@
 
 @media screen and (max-width: 480px) {
     .about-project {
-        max-width: 320px;
+        max-width: calc(var(--max-width-screen-320) - 8px);
         padding-top: 70px;
     }
 
@@ -172,12 +157,5 @@
         font-size: 18px;
         line-height: 21.78px;
         padding-bottom: 28px;
-    }
-}
-
-/* 320px */
-@media screen and (max-width: 320px) {
-    .about-project {
-        max-width: 284px;
     }
 }

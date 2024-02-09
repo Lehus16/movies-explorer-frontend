@@ -12,7 +12,7 @@ import { movies } from '../../utils/movies';
 import { cardsConstants } from "../../utils/cardsConstants.js";
 const App = () => {
 
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
     const [shortMovies, setShortMovies] = useState([]);
     const [isMoviesShort, setIsMoviesShort] = useState(false);
 

@@ -36,7 +36,7 @@ function Register() {
                 }>
                     <MyInput props={
                         {
-                            className: `register__input ${errors.name ? 'register__input-error' : ''}`,
+                            className: `register__input ${errors.name ? 'register__input_type_error' : ''}`,
                             placeholder: '',
                             spanclassname: 'register__validation-text',
                             labelclassname: 'register__label',
@@ -52,7 +52,7 @@ function Register() {
                     } />
                     <MyInput props={
                         {
-                            className: `register__input ${errors.email ? 'register__input-error' : ''}`,
+                            className: `register__input ${errors.email ? 'register__input_type_error' : ''}`,
                             placeholder: '',
                             spanclassname: 'register__validation-text',
                             labelclassname: 'register__label',
@@ -68,7 +68,7 @@ function Register() {
                     } />
                     <MyInput props={
                         {
-                            className: `register__input ${errors.password ? 'register__input-error' : ''}`,
+                            className: `register__input ${errors.password ? 'register__input_type_error' : ''}`,
                             placeholder: '',
                             spanclassname: 'register__validation-text',
                             spanvalue: errors.password,

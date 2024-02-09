@@ -9,7 +9,7 @@
 }
 
 .header__container {
-    max-width: 1140px;
+    max-width: var(--max-width-screen-1280);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -38,11 +38,9 @@
     transform: rotate(-180deg);
 }
 
-
-
-.header__sign-up-button_path_main {
+.header__sign-up-button {
     text-decoration: none;
-    color: rgba(255, 255, 255, 1);
+    color: rgba(0, 0, 0, 1);
     margin-right: 30px;
     font-size: 12px;
     line-height: 16px;
@@ -51,6 +49,11 @@
     -moz-transition: opacity 0.3s ease;
     -ms-transition: opacity 0.3s ease;
     -o-transition: opacity 0.3s ease;
+}
+
+
+.header__sign-up-button_path_main {
+    color: rgba(255, 255, 255, 1);
 }
 
 .header__sign-in-button {
@@ -69,18 +72,6 @@
     -o-transition: opacity 0.3s ease;
 }
 
-.header__sign-up-button {
-    text-decoration: none;
-    color: rgba(0, 0, 0, 1);
-    margin-right: 30px;
-    font-size: 12px;
-    line-height: 16px;
-    transition: opacity .3s ease;
-    -webkit-transition: opacity 0.3s ease;
-    -moz-transition: opacity 0.3s ease;
-    -ms-transition: opacity 0.3s ease;
-    -o-transition: opacity 0.3s ease;
-}
 
 .header__sign-up-button_path_main:hover {
     opacity: .8;
@@ -204,25 +195,12 @@
     height: 44px;
 }
 
-/* 1140px*/
-@media screen and (max-width: 1140px) {
-    .header__container {
-        max-width: 1100px;
-    }
-}
-
-/* 1024px */
-@media screen and (max-width: 1024px) {
-    .header__container {
-        max-width: 900px;
-    }
-}
-
+/* Media queries */
 
 /* 768px */
 @media screen and (max-width: 768px) {
     .header__container {
-        max-width: 708px;
+        max-width: calc(100% - 60px);
     }
 
     .header__profile-button,
@@ -235,16 +213,6 @@
         display: block;
     }
 
-}
-
-
-/* 480px */
-
-@media screen and (max-width: 480px) {
-    .header__container {
-        max-width: 400px;
-    }
-
     .header__burger-icon {
         width: 40px;
         height: 43px;
@@ -252,10 +220,11 @@
 
 }
 
+
 /* 320px */
 @media screen and (max-width: 320px) {
     .header__container {
-        max-width: 292px;
+        max-width: calc(100% - 28px);
     }
 
     .header__sign-up-button {

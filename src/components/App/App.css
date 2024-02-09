@@ -1,10 +1,7 @@
 :root {
-  --max-width-screen-1280: 1140px;
-  --max-width-screen-1140: 1024px;
-  --max-width-screen-1024: 768px;
-  --max-width-screen-768: 668px;
-  --max-width-screen-480px: 320px;
-  --max-width-screen-320px: 284px;
+  --max-width-screen-1280: calc(100% - 140px);
+  --max-width-screen-768: calc(100% - 60px);
+  --max-width-screen-320: calc(100% - 28px);
   --font-weight: 400;
   --text-color: rgba(255, 255, 255, 1);
   --text-color-dark: rgba(0, 0, 0, 1);

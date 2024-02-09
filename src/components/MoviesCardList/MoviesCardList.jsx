@@ -18,7 +18,6 @@ function MoviesCardList({ cards, isLoading, shortMovies, isMoviesShort }) {
     // Функция ресайза окна для определения количества карточек
     const rezizeWindow = () => {
         const windowWidth = window.innerWidth;
-        console.log(windowWidth)
         if (windowWidth >= screenResolutionConstants.tablet) {
             setCardsCount(cardsConstants.CARDS_COUNT_FOR_DESKTOP);
         } else if (windowWidth <= screenResolutionConstants.tablet && windowWidth > screenResolutionConstants.mobile) {

@@ -36,7 +36,7 @@ const Login = () => {
                 }}>
                     <MyInput props={
                         {
-                            className: `login__input ${errors.email ? "login__input-error" : ""}`,
+                            className: `login__input ${errors.email ? "login__input_type_error" : ""}`,
                             placeholder: "",
                             type: "email",
                             name: "email",
@@ -52,7 +52,7 @@ const Login = () => {
                     } />
                     <MyInput props={
                         {
-                            className: `login__input ${errors.password ? "login__input-error" : ""}`,
+                            className: `login__input ${errors.password ? "login__input_type_error" : ""}`,
                             type: "password",
                             name: "password",
                             onChange: handleInputChange,
