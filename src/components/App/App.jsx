@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 import './App.css';
 import Main from "../Main/Main.jsx";
@@ -10,11 +10,14 @@ import Login from "../Login/Login.jsx";
 import NotFoundPage from "../NotFoundPage/NotFoundPage.jsx";
 import { movies } from '../../utils/movies';
 import { cardsConstants } from "../../utils/cardsConstants.js";
+
 const App = () => {
+
 
     const [loggedIn, setLoggedIn] = useState(true);
     const [shortMovies, setShortMovies] = useState([]);
     const [isMoviesShort, setIsMoviesShort] = useState(false);
+
 
 
     const onFilterChange = () => {
