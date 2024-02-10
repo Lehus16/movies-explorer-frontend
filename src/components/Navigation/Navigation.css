@@ -1,0 +1,112 @@
+.navigation {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 1);
+    display: none;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    height: 100vh;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    /* width: 0; */
+    width: 520px;
+    transition: all .3s ease;
+    /* overflow: hidden;     */
+}
+
+.navigation__close-button {
+    position: absolute;
+    top: 22.44px;
+    right: 22.44px;
+    
+}
+
+.navigation__close-button:hover {
+    cursor: pointer;
+    opacity: .8;
+}
+
+.navigation_active {
+    display: flex;
+    /* width: 520px; */
+    opacity: 1;
+    visibility: visible;
+}
+
+.navigation__container {
+    margin: 159px auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navigation__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.navigation__link {
+    text-align: center;
+    text-decoration: none;
+    color: rgba(0, 0, 0, 1);
+    cursor: pointer;
+    padding-bottom: 4px;
+    margin-bottom: 22px;
+    border-bottom: 2px solid rgba(0, 0, 0, 0);
+    width: fit-content;
+    font-size: 18px;
+    line-height: 21.78px;
+    font-weight: 400;
+}
+
+.navigation__link:hover {
+    border-bottom: 2px solid rgba(0, 0, 0, 1);
+}
+
+.navigation__profile-link {
+    display: flex;
+    margin-bottom: 92px;
+    text-decoration: none;
+    align-items: center;
+}
+
+.navigation__profile-link-text {
+    color: rgba(0, 0, 0, 1);
+    margin-right: 17px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.navigation__profile-link-logo {
+    padding: 7.25px 8px;
+    background-color: rgba(249, 249, 249, 1);
+}
+
+.navigation__profile-link:hover {
+    opacity: .8;
+}
+
+
+@media screen and (max-width: 540px) {
+    .navigation_active {
+        width: 100%;
+    }
+
+    .navigation__link {
+        padding-bottom: 7px;
+        margin-bottom: 15px;
+    }
+
+    .navigation__container {
+        margin-top: 144px;
+
+    }
+
+    .navigation__profile-link {
+        margin-bottom: 48px;
+    }
+}

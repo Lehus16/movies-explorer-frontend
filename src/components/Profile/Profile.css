@@ -1,0 +1,148 @@
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.profile__title {
+    margin: 74px 0 123px;
+    font-size: 24px;
+    line-height: 29.05px;
+    font-weight: 400;
+}
+
+.profile__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: none;
+}
+
+.profile__input-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 410px;
+}
+
+.profile__input-container:last-of-type {
+    border-top: 1px solid rgba(232, 232, 232, 1);
+    padding: 16px 0 0 0;
+}
+
+.profile__label {
+    font-size: 11px;
+    line-height: 13.31px;
+    font-weight: 500;
+}
+
+.profile__input {
+    width: calc(100% - 70px);
+    padding: 10px 10px 10px 0;
+    border: none;
+    text-align: end;
+    font-size: 11px;
+    line-height: 13.31px;
+    border-radius: 4px;
+}
+
+.profile__input::placeholder {
+    color: rgba(0, 0, 0, 1);
+    font-size: 11px;
+    line-height: 13.31px;
+}
+
+.profile__input:focus {
+    outline: none;
+    background-color: rgba(249, 249, 249, 1);
+    outline: 2px solid rgba(43, 224, 128, 1);
+}
+
+.profile__input:hover {
+    background-color: rgba(249, 249, 249, 1);
+}
+
+.profile__input-error {
+    outline: 1px solid rgba(238, 52, 101, 1);
+}
+
+.profile__input-error:focus {
+    outline: 2px solid rgba(238, 52, 101, 1);
+}
+
+.profile__button {
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+    margin: 215px 0 16px;
+    font-size: 13px;
+    line-height: 15.73px;
+}
+
+.profile__button_unactive:hover {
+    opacity: 1;
+    cursor: default;
+}
+
+.profile__button:last-of-type {
+    color: rgba(238, 52, 101, 1);
+    margin: 0;
+}
+
+.profile__button:hover {
+    opacity: .8;
+}
+
+.profile__validation-text {
+    width: 100%;
+    color: rgba(238, 52, 101, 1);
+    height: 12px;
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: 6px;
+    text-align: end;
+}
+
+
+/* Media queries */
+
+/* 768px */
+
+@media screen and (max-width: 768px) {
+    .profile__title {
+        margin: 236px 0 96px;
+    }
+
+    .profile__button {
+        margin: 210px 0 16px;
+    }
+}
+
+/* 480px */
+
+@media screen and (max-width: 480px) {
+    .profile__title {
+        margin: 70px 0 80px;
+    }
+
+    .profile__button {
+        margin: 379px 0 16px;
+        font-size: 12px;
+        line-height: 14.52px;
+    }
+
+    .profile__input-container {
+        width: 310px;
+    }
+
+}
+
+/* 320px */
+@media screen and (max-width: 320px) {
+    .profile__input-container {
+        width: 260px;
+    }
+
+}
