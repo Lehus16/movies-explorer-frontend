@@ -7,7 +7,7 @@ import burgerMenuIcon from "../../images/burgerMenuIcon.svg";
 
 import './Header.css';
 
-const Header = ({ loggedIn }) => {
+const Header = ({ isLoggedIn }) => {
 
     const location = useLocation();
 
@@ -20,7 +20,7 @@ const Header = ({ loggedIn }) => {
         <header>
             {location.pathname === "/" ?
                 (<div className="header header_path_main" >
-                    {!loggedIn ?
+                    {!isLoggedIn ?
                         (<div className="header__container header__unauth-container">
                             <Logo className={"header__logo"} />
                             <nav>

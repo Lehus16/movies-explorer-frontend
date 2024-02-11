@@ -7,15 +7,13 @@ import MyInput from '../MyInput/MyInput.jsx';
 import useFormValidation from '../../hooks/useFormValidation.js';
 
 
-const Login = () => {
+const Login = ({ onSignIn }) => {
 
     const { values, errors, isFormValid, handleChange } = useFormValidation();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (isFormValid) {
-            console.log(values);
-        }
+        onSignIn(values)
     }
 
     const handleInputChange = (event) => {

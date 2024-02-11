@@ -5,7 +5,7 @@ import MyInput from '../MyInput/MyInput.jsx';
 import Logo from '../Logo/Logo.jsx';
 import { Link } from 'react-router-dom';
 import useFormValidation from '../../hooks/useFormValidation.js';
-function Register() {
+function Register({ onSignUp }) {
 
     const { values, errors, isFormValid, handleChange } = useFormValidation();
 
@@ -15,10 +15,10 @@ function Register() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (isFormValid) {
-            console.log(values);
-        }
+        onSignUp(values);
     }
+
+
     return (
         <section className='register'>
             <div className='register__form-container'>

@@ -5,15 +5,16 @@ import MyInput from '../MyInput/MyInput.jsx';
 import Header from "../Header/Header.jsx";
 import useFormValidation from '../../hooks/useFormValidation.js';
 
-function Profile({ user, loggenIn }) {
+function Profile({ isLoggedIn }) {
 
     const { values, handleChange, errors, isFormValid } = useFormValidation();
     const onSubmitForm = () => {
         console.log(values);
     }
 
-    const onSignOut = () => {
-        // loggenIn(false);
+    const onSignOut = (event) => {
+        event.preventDefault()
+        onSignOut()
     }
 
     const handleInputChange = (evt) => {
@@ -21,7 +22,7 @@ function Profile({ user, loggenIn }) {
     }
     return (
         <>
-            <Header loggenIn={loggenIn} />
+            <Header loggenIn={isLoggedIn} />
             <main className='profile'>
                 <h1 className='profile__title'>Привет, Алексей!</h1>
                 <MyForm props={{
@@ -38,7 +39,6 @@ function Profile({ user, loggenIn }) {
                             type: 'text',
                             spanclassname: 'profile__validation-text',
                             spanvalue: errors.name,
-                            required: true,
                             labelclassname: 'profile__label',
                             labelvalue: 'Имя:',
                             autoComplete: 'off',
@@ -50,7 +50,6 @@ function Profile({ user, loggenIn }) {
                             onChange: handleInputChange,
                             name: 'email',
                             type: 'email',
-                            required: true,
                             autoComplete: 'off',
                             placeholder: '',
                             spanclassname: 'profile__validation-text',
