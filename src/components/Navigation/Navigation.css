@@ -1,5 +1,5 @@
 .navigation {
-    position: absolute;
+    position: fixed;
     background-color: rgba(255, 255, 255, 1);
     display: none;
     opacity: 0;
@@ -15,12 +15,37 @@
     /* overflow: hidden;     */
 }
 
-.navigation__close-button {
+.navigation-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 4;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, .3);
+    transition: all .3s ease;
+}
+
+.navigation-overlay_type_hidden {
+    visibility: hidden;
+    opacity: 0;
+    display: hidden;
+}
+
+navigation-overlay_type_visible {
+    visibility: visible;
+    opacity: 1;
+    display: block;
+}
+
+.navigation__close-button-container {
     position: absolute;
     top: 22.44px;
     right: 22.44px;
-    
+    border: none;
+    background-color: inherit;
 }
+
 
 .navigation__close-button:hover {
     cursor: pointer;
@@ -46,7 +71,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    
+
 }
 
 .navigation__link {
@@ -92,6 +117,10 @@
 
 
 @media screen and (max-width: 540px) {
+    .navigation {
+        height: 100dvh;
+    }
+
     .navigation_active {
         width: 100%;
     }

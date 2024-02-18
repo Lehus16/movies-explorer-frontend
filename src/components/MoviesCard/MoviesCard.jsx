@@ -1,22 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import './MoviesCard.css'
-import Zatychka from '../../images/Zatychka.png'
-function MoviesCard({ card }) {
-    const [isAdded, setIsAdded] = useState(card.isSaved);
+import { MOVIES_API_URL } from '../../utils/urlConstants';
+function MoviesCard({
+    card,
+    onSaveMovie,
+    onDeleteMovie,
+    isSaved,
+    savedMovies
+}) {
     const location = useLocation()
-    const onMovieSave = () => {
-        setIsAdded(true);
-    }
 
-    const onMovieDelete = () => {
-        setIsAdded(false);
+    const [isMovieSaved, setIsMovieSaved] = useState(isSaved);
+    const [movieToBeDeleted, setMovieToBeDeleted] = useState(null);
+
+    useEffect(() => {
+        if (location.pathname === '/movies') {
+            const savedMovie = savedMovies.find((savedMovie) => savedMovie?.movieId === card.id);
+            setMovieToBeDeleted(savedMovie);
+            setIsMovieSaved(isSaved);
+        }
+    }, [location.pathname, savedMovies, card.id, isSaved]);
+
+    const onToggleMovie = () => {
+        if (isMovieSaved) {
+            onDeleteMovie(card || movieToBeDeleted);
+            setIsMovieSaved(false);
+        } else {
+            onSaveMovie(movieToBeDeleted || card);
+            setIsMovieSaved(true);
+        }
     }
 
     return (
         <figure className='movies-card'>
             <figcaption className='movies-card__figcaption'>
-                <div>
+                <div className='movies-card__info'>
                     <h5 className='movies-card__title'>{card.nameRU}</h5>
                     <p className='movies-card__duration'>
                         {`${(card.duration / 60 < 1) ?
@@ -26,17 +45,25 @@ function MoviesCard({ card }) {
                     </p>
                 </div>
                 {location.pathname === '/movies' ?
-                    <button onClick={isAdded ? onMovieDelete : onMovieSave} className={`movies-card__button ${isAdded ? 'movies-card__button_type_active' : 'movies-card__button_type_unactive'}`} type='button'>
+                    <button
+                        onClick={onToggleMovie}
+                        className={`movies-card__button ${isMovieSaved ?
+                            'movies-card__button_type_active'
+                            : 'movies-card__button_type_unactive'}`}
+                        type='button'>
                     </button>
                     : location.pathname === '/saved-movies' &&
-                    <button type='button'
-                        className='movies-card__button movies-card__button_type_delete'>
+                    <button
+                        type='button'
+                        className='movies-card__button movies-card__button_type_delete'
+                        onClick={() => onDeleteMovie(card)}
+                    >
                     </button>}
 
             </figcaption>
             <a className='movies-card__link' href={card.trailerLink} target='_blank' rel='noreferrer'>
                 <img className='movies-card__image'
-                    src={card.image ? card.image : Zatychka}
+                    src={location.pathname === '/saved-movies' ? card.image : `${MOVIES_API_URL}${card.image.url}`}
                     alt={`обложка фильма: ${card.nameRU}`}
                 />
             </a>

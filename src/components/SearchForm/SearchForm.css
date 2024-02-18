@@ -28,10 +28,7 @@
 }
 
 .search-form__input:focus {
-    outline: 0;
-}
-
-.search-form__input:hover {
+    outline: 1px solid rgba(209, 209, 209, 1);
     background-color: rgba(229, 229, 229, 1);
 }
 

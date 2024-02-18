@@ -20,7 +20,7 @@ function Register({ onSignUp }) {
 
 
     return (
-        <section className='register'>
+        <main className='register'>
             <div className='register__form-container'>
                 <Logo className={'register__logo'} />
                 <MyForm props={
@@ -28,9 +28,6 @@ function Register({ onSignUp }) {
                         className: "register__form",
                         titleclassname: 'register__title',
                         titlevalue: 'Добро пожаловать!',
-                        buttonclassname: `register__button ${!isFormValid ? 'register__button_unactive' : ''}`,
-                        disabled: !isFormValid,
-                        buttonvalue: 'Зарегистрироваться',
                         onSubmit: handleSubmit
                     }
                 }>
@@ -82,6 +79,12 @@ function Register({ onSignUp }) {
                             onChange: handleInputChange
                         }
                     } />
+                    <button
+                        className={`register__button ${!isFormValid ? 'register__button_unactive' : ''}`}
+                        type="submit"
+                        disabled={!isFormValid}>
+                        <p>Зарегистрироваться</p>
+                    </button>
                 </MyForm>
                 <div className='register__signin-container'>
                     <p className='register__signin-text'>
@@ -92,7 +95,7 @@ function Register({ onSignUp }) {
                     </Link>
                 </div>
             </div>
-        </section>
+        </main>
     )
 }
 

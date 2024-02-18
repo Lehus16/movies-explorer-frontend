@@ -7,7 +7,7 @@ const checkResponse = (res) => {
 }
 
 export const getMovies = () => {
-    return fetch(`${MOVIES_API_URL}`, {
+    return fetch(`${MOVIES_API_URL}/beatfilm-movies`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

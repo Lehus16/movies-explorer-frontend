@@ -5,15 +5,30 @@ import SearchForm from '../SearchForm/SearchForm';
 import Header from "../Header/Header.jsx";
 import Footer from "../Footer/Footer.jsx";
 
-function SavedMovies({ cards, isLoggedIn, onFilterChange, isMoviesShort, shortMovies }) {
-
-
+function SavedMovies({
+    movies,
+    isLoggedIn,
+    toggleBurgerMenu,
+    isBurgerMenuOpen,
+    onDeleteMovie,
+    searhSavedMovies,
+}) {
     return (
         <>
-            <Header isLoggedIn={isLoggedIn} />
+            <Header
+                toggleBurgerMenu={toggleBurgerMenu}
+                isBurgerMenuOpen={isBurgerMenuOpen}
+                isLoggedIn={isLoggedIn} />
             <main>
-                <SearchForm onFilterChange={onFilterChange} />
-                <MoviesCardList isMoviesShort={isMoviesShort} shortMovies={shortMovies} isLoading={false} cards={cards} />
+                <SearchForm
+                    searhSavedMovies={searhSavedMovies}
+
+                />
+                <MoviesCardList
+                    onDeleteMovie={onDeleteMovie}
+                    movies={movies}
+
+                />
             </main>
             <Footer />
         </>

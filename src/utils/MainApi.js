@@ -1,4 +1,4 @@
-import { MY_API_URL } from "./urlConstants";
+import { MY_API_URL, MOVIES_API_URL } from "./urlConstants";
 
 
 export function checkResponse(res) {
@@ -12,7 +12,7 @@ export const getUserInfo = () => {
         method: 'GET',
         credentials: 'include',
     })
-        .then(res => res.json());
+        .then(checkResponse);
 }
 
 export const patchUserInfo = (values) => {
@@ -28,6 +28,7 @@ export const patchUserInfo = (values) => {
             email: values.email
         })
     })
+        .then(checkResponse)
 }
 
 
@@ -104,18 +105,18 @@ export const saveMovie = (movie) => {
             duration: movie.duration,
             year: movie.year,
             description: movie.description,
-            image: movie.image,
+            image: MOVIES_API_URL + movie.image.url,
             trailerLink: movie.trailerLink,
-            thumbnail: movie.thumbnail,
-            movieId: movie.movieId,
+            thumbnail: MOVIES_API_URL + movie.image.formats.thumbnail.url,
+            movieId: movie.id,
         })
-            .then(checkResponse)
     })
+        .then(checkResponse)
 }
 
 
-export const deleteMovie = (movieId) => {
-    return fetch(`${MY_API_URL}/movies/${movieId}`, {
+export const deleteMovie = (id) => {
+    return fetch(`${MY_API_URL}/movies/${id}`, {
         method: 'DELETE',
         credentials: 'include',
         headers: {
@@ -126,14 +127,14 @@ export const deleteMovie = (movieId) => {
         .then(checkResponse)
 }
 
-// export const checkToken = () => {
-//     return fetch(`${MY_API_URL}/users/me`, {
-//         method: 'GET',
-//         credentials: 'include',
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json',
-//         },
-//     })
-//         .then(checkResponse)
-// }
+export const checkToken = () => {
+    return fetch(`${MY_API_URL}/users/me`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        },
+    })
+        .then(checkResponse)
+}

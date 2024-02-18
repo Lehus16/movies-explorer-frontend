@@ -20,16 +20,13 @@ const Login = ({ onSignIn }) => {
         handleChange(event)
     }
     return (
-        <section className="login">
+        <main className="login">
             <div className='login__form-container'>
                 <Logo className={"login__logo"} />
                 <MyForm props={{
                     className: "login__form",
                     titleclassname: "login__title",
-                    buttonclassname: `login__button ${!isFormValid ? "login__button_unactive" : ""}`,
-                    buttonvalue: "Войти",
                     titlevalue: "Рады видеть!",
-                    disabled: !isFormValid,
                     onSubmit: handleSubmit
                 }}>
                     <MyInput props={
@@ -64,6 +61,12 @@ const Login = ({ onSignIn }) => {
                             autoComplete: "off"
                         }
                     } />
+                    <button
+                        className={`login__button ${!isFormValid ? "login__button_unactive" : ""}`}
+                        type='submit'
+                        disabled={!isFormValid}>
+                        <p>Войти</p>
+                    </button>
                 </MyForm>
                 <div className="login__link-container">
                     <p className="login__link-text">
@@ -75,7 +78,8 @@ const Login = ({ onSignIn }) => {
                 </div>
             </div>
 
-        </section>
+
+        </main>
     )
 }
 

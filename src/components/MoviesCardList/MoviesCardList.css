@@ -1,7 +1,8 @@
 .movies-card-list {
     width: 100%;
 }
-/*  */
+
+
 .movies-card-list__container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -16,7 +17,7 @@
 }
 
 .movies-card-list__button-container {
-    max-width: 1140px;
+    max-width: var(--max-width-screen-1280);
     margin: 0 auto;
 }
 
@@ -39,6 +40,15 @@
 
 .movies-card-list__button:hover {
     background-color: rgba(220, 220, 220, 1);
+}
+
+.movies-card-list__error {
+    font-size: 28px;
+    line-height: 40px;
+    font-weight: 500;
+    text-align: center;
+    color: rgb(137, 137, 137);
+    padding: 50px 0 300px;
 }
 
 /* Media queries */

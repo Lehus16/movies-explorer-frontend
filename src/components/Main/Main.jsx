@@ -7,11 +7,14 @@ import AboutProject from "../AboutProject/AboutProject";
 import Techs from "../Techs/Techs";
 import AboutMe from "../AboutMe/AboutMe";
 import Portfolio from "../Portfolio/Portfolio";
-const Main = ({ isLoggedIn }) => {
+const Main = ({ isLoggedIn, toggleBurgerMenu, isBurgerMenuOpen }) => {
 
     return (
         <>
-            <Header isLoggedIn={isLoggedIn} />
+            <Header
+                toggleBurgerMenu={toggleBurgerMenu}
+                isBurgerMenuOpen={isBurgerMenuOpen}
+                isLoggedIn={isLoggedIn} />
             <main className="main">
                 <div className="main__container">
                     <Promo />

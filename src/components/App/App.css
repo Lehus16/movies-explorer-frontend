@@ -22,6 +22,14 @@
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  scrollbar-gutter: stable;
+}
+
+.no-scroll {
+  overflow: hidden;
+}
 
 .page {
   margin: 0 auto;

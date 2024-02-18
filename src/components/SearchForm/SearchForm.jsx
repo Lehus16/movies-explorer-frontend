@@ -1,13 +1,40 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './SearchForm.css'
 import searchIcon from "../../images/searchIcon.svg";
 import findIcon from "../../images/find.svg";
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
+import { useLocation } from 'react-router-dom';
 
-function SearchForm({ onFilterChange }) {
-    const submitFunc = function (e) {
-        // e.preventDefault();
-        console.log('Форма отправлена');
+function SearchForm({
+    onSearchMovies,
+    onCheckboxChange,
+    checkboxState,
+    searhSavedMovies
+}) {
+
+    const location = useLocation();
+
+    const [queryText, setQueryText] = useState('');
+    const [checkboxValue, setCheckboxValue] = useState(checkboxState);
+
+    useEffect(() => {
+        if (location.pathname === '/movies') {
+            const moviesQuery = localStorage.getItem('moviesQuery')
+            if (moviesQuery) {
+                setQueryText(moviesQuery);
+            }
+        }
+    }, [location.pathname]);
+
+    const onSubmitFunc = function (event) {
+        event.preventDefault();
+        if (location.pathname === '/movies') {
+            localStorage.setItem('moviesQuery', queryText);
+            onSearchMovies(queryText)
+        } else {
+            searhSavedMovies(queryText, checkboxValue);
+            setQueryText('');
+        }
     }
     return (
         <div className='search-form-wrapper'>
@@ -15,12 +42,14 @@ function SearchForm({ onFilterChange }) {
                 <img className='search-form__search-icon' src={searchIcon} alt='Иконка поиска' />
                 <input
                     minLength={2}
-                    required={true}
                     className='search-form__input'
                     type='text'
-                    placeholder='Фильм' />
+                    placeholder='Фильм'
+                    onChange={(event) => setQueryText(event.target.value)}
+                    value={queryText || ''}
+                />
                 <button
-                    onClick={submitFunc}
+                    onClick={onSubmitFunc}
                     className='search-form__submit-button'
                     type='submit'>
                     <img
@@ -29,7 +58,13 @@ function SearchForm({ onFilterChange }) {
                         alt='Кнопка поиска фильмов' />
                 </button>
             </form>
-            <FilterCheckbox onFilterChange={onFilterChange} />
+            <FilterCheckbox
+                onCheckboxChange={onCheckboxChange}
+                checkboxValue={checkboxValue}
+                setCheckboxValue={setCheckboxValue}
+
+
+            />
         </div>
 
     )

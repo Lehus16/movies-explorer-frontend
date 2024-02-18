@@ -1,0 +1,150 @@
+.info-tooltip {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .3);
+    top: 0;
+    left: 0;
+    z-index: 10;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s ease;
+    -webkit-transition: opacity 0.3s ease;
+    -moz-transition: opacity 0.3s ease;
+    -ms-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+}
+
+.info-tooltip_type_opened {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.info-tooltip__container {
+    position: relative;
+    border-radius: 12px;
+    width: 400px;
+    height: 300px;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.info-tooltip__image {
+    width: 80px;
+    height: 80px;
+}
+
+.info-tooltip__text {
+    font-size: 18px;
+    line-height: 22px;
+    font-weight: 400;
+    max-width: calc(100% - 80px);
+    margin: 30px auto;
+    text-align: center;
+}
+
+
+
+.info-tooltip__close-button {
+    position: absolute;
+    top: -40px;
+    right: -40px;
+    width: 32px;
+    height: 32px;
+    border: none;
+    background-color: initial;
+}
+
+.info-tooltip__close-button:hover {
+    cursor: pointer;
+    opacity: .6;
+}
+
+.info-tooltip__close-icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* Media Queries */
+
+/* 768px */
+
+@media screen and (max-width: 768px) {
+    .info-tooltip {
+        height: 100dvh;
+    }
+
+    .info-tooltip__container {
+        width: 320px;
+        height: 220px;
+    }
+
+    .info-tooltip__close-button {
+        top: -36px;
+        right: -36px;
+        width: 26px;
+        height: 26px;
+    }
+
+    .info-tooltip__close-icon {
+        width: 26px;
+        height: 26px;
+    }
+
+    .info-tooltip__text {
+        font-size: 16px;
+        line-height: 20px;
+        margin: 20px auto;
+
+    }
+
+    .info-tooltip__image {
+        width: 60px;
+        height: 60px;
+    }
+
+
+}
+
+/* 480px */
+
+@media screen and (max-width: 480px) {
+    .info-tooltip__container {
+        width: 300px;
+        height: 180px;
+    }
+
+    .info-tooltip__close-button {
+        top: -32px;
+        right: 0;
+        width: 22px;
+        height: 22px;
+    }
+
+    .info-tooltip__close-icon {
+        width: 22px;
+        height: 22px;
+    }
+
+    .info-tooltip__text {
+        font-size: 14px;
+        line-height: 18px;
+        margin: 20px auto;
+
+    }
+
+    .info-tooltip__image {
+        width: 50px;
+        height: 50px;
+    }
+}
