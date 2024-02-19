@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import './App.css';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
@@ -19,7 +19,7 @@ const App = () => {
     const [userInfo, setUserInfo] = useState({});
     const [foundMovies, setFoundMovies] = useState([]);
     const [savedMovies, setSavedMovies] = useState([]);
-    const [isLoggedIn, setIsloggedIn] = useState(false);
+    const [isLoggedIn, setIsloggedIn] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const [errorText, setErrorText] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
@@ -350,7 +350,6 @@ const App = () => {
                             <Register
                                 onSignUp={onSignUp}
                                 isLoading={isLoading}
-
                             />
                         }
 

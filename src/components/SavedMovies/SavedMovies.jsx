@@ -15,6 +15,7 @@ function SavedMovies({
 }) {
     return (
         <>
+        
             <Header
                 toggleBurgerMenu={toggleBurgerMenu}
                 isBurgerMenuOpen={isBurgerMenuOpen}
