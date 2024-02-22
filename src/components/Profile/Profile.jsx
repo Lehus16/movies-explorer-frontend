@@ -16,7 +16,9 @@ function Profile({
     closeInfoTooltip,
     isInfoTooltipOpen,
     errorText,
-    isSuccess
+    isSuccess,
+    isLoading,
+    infoTooltipText
 }) {
 
     const { values, handleChange, errors, isFormValid, resetFormValues } = useFormValidation();
@@ -81,11 +83,12 @@ function Profile({
                             labelvalue: 'E-mail:'
                         }} />
                     </div>
+                    <span className='profile__error'>{errorText}</span>
                     <button
                         className={`profile__button`}
                         type='submit'
                         disabled={!isFormValid || (values.name === currentUser.name && values.email === currentUser.email)}>
-                        <p>Редактировать</p>
+                        <p>{isLoading ? 'Сохранение...' : 'Редактировать'}</p>
                     </button>
                     <button
                         onClick={onSignOutClick}
@@ -96,7 +99,7 @@ function Profile({
             </main>
             <InfoTooltip
                 isInfoTooltipOpen={isInfoTooltipOpen}
-                errorText={errorText}
+                infoTooltipText={infoTooltipText}
                 isSuccess={isSuccess}
                 closeInfoTooltip={closeInfoTooltip} />
         </div>

@@ -1,40 +1,39 @@
-import React, { useEffect } from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import './FilterCheckbox.css'
-function FilterCheckbox({ onCheckboxChange, checkboxValue, setCheckboxValue }) {
+function FilterCheckbox({ onCheckboxChange, isLoading, savedMoviesCheckbox, setSavedMoviesCheckbox }) {
 
 
     const location = useLocation();
-
-
-    useEffect(() => {
+    const [checkboxChecked, setCheckboxChecked] = useState(() => {
         if (location.pathname === '/movies') {
-            const shortMoviesCheckbox = localStorage.getItem('shortMoviesCheckbox');
-            if (shortMoviesCheckbox === "true") {
-                setCheckboxValue(true);
-            } else {
-                setCheckboxValue(false);
-            }
+            return localStorage.getItem('shortMoviesCheckbox') === "true";
         }
-    }, [location.pathname, checkboxValue, setCheckboxValue]);
+        return false;
+    });
 
-    const onChangeCheckboxState = () => {
+
+    const checkboxToggle = () => {
         if (location.pathname === '/movies') {
-            setCheckboxValue(!checkboxValue);
-            onCheckboxChange();
-        } else {
-            setCheckboxValue(!checkboxValue);
+            setCheckboxChecked(!checkboxChecked);
+            onCheckboxChange(!checkboxChecked);
+        } else if (location.pathname === '/saved-movies') {
+            setSavedMoviesCheckbox(!savedMoviesCheckbox);
+            onCheckboxChange(!savedMoviesCheckbox);
         }
     }
+
 
     return (
         <div className='filter-checkbox'>
             <label className='filter-checkbox__switch'>
                 <input
-                    onChange={onChangeCheckboxState}
-                    checked={checkboxValue}
+                    onChange={checkboxToggle}
+                    checked={location.pathname === '/saved-movies' ? savedMoviesCheckbox : checkboxChecked}
                     className='filter-checkbox__input'
-                    type='checkbox' />
+                    type='checkbox'
+                    disabled={isLoading}
+                />
                 <span className='filter-checkbox__slider'></span>
             </label>
             <p className='filter-checkbox__text'>Короткометражки</p>

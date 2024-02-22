@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import './App.css';
 import { CurrentUserContext } from "../../contexts/CurrentUserContext.js";
@@ -24,8 +24,8 @@ const App = () => {
     const [errorText, setErrorText] = useState('');
     const [isSuccess, setIsSuccess] = useState(false);
     const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-    const [checkboxState, setCheckboxState] = useState(false);
     const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
+    const [infoTooltipText, setInfoTooltipText] = useState('');
 
 
     const navigate = useNavigate();
@@ -103,7 +103,9 @@ const App = () => {
             console.log(`Ошибка авторизации: ${err}`);
             setErrorText('Неправильные почта или пароль');
         } finally {
-            setIsLoading(false);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 500);
         }
     }
 
@@ -123,19 +125,25 @@ const App = () => {
 
     const onPatchUserInfo = async (values) => {
         setErrorText('')
+        setIsLoading(true)
         try {
-            const data = await mainApi.patchUserInfo(values);
-            setIsSuccess(true)
-            // document.body.classList.add('no-scroll')
-            setErrorText('Данные успешно обновлены')
-            setIsInfoTooltipOpen(true)
-            setUserInfo(data);
+            await mainApi.patchUserInfo(values)
+                .then((info) => {
+                    setUserInfo(info);
+                    setIsSuccess(true)
+                    setInfoTooltipText('Данные успешно обновлены');
+                    setIsInfoTooltipOpen(true)
+                });
         } catch (err) {
-            // document.body.classList.add('no-scroll')
             console.log(`Ошибка обновления данных: ${err}`);
             setIsSuccess(false);
+            setInfoTooltipText('Произошла ошибка. Попробуйте ещё раз');
             setErrorText(`Ошибка обновления данных ${err}`);
             setIsInfoTooltipOpen(true)
+        } finally {
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 500)
         }
     }
 
@@ -159,43 +167,36 @@ const App = () => {
                     movieNameRU.includes(query) || movieNameEN.includes(query)
                 )
             })
+            localStorage.setItem('foundMovies', JSON.stringify(movies));
             setFoundMovies(movies);
             const shortMoviesCheckbox = localStorage.getItem('shortMoviesCheckbox');
             if (shortMoviesCheckbox === "true") {
                 const shortMovies = movies.filter((movie) => movie.duration <= cardsConstants.SHORT_MOVIE_DURATION
                 );
                 setFoundMovies(shortMovies);
-                localStorage.setItem('foundMovies', JSON.stringify(shortMovies));
             } else {
                 setFoundMovies(movies)
-                localStorage.setItem('foundMovies', JSON.stringify(movies));
             }
             setIsSuccess(true);
         } catch (err) {
             console.log(`Ошибка при поиске фильмов: ${err}`);
-            setErrorText('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
             setIsSuccess(false)
+            setErrorText('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
         } finally {
             setTimeout(() => {
                 setIsLoading(false)
-            }, 1000)
+            }, 500)
         }
 
     }
 
-    const onCheckboxChange = () => {
-        const shortMoviesCheckbox = localStorage.getItem('shortMoviesCheckbox');
-        if (shortMoviesCheckbox === "true") {
-            setCheckboxState(false);
-            localStorage.setItem('shortMoviesCheckbox', false);
-        } else {
-            setCheckboxState(true);
-            localStorage.setItem('shortMoviesCheckbox', true);
-        }
+    const onCheckboxChange = (isChecked) => {
+        localStorage.setItem('shortMoviesCheckbox', JSON.stringify(isChecked));
     }
 
     const searhSavedMovies = async (moviesQuery, checkboxState) => {
         setErrorText('');
+        setIsLoading(true);
         try {
             if (!JSON.parse(localStorage.getItem('savedMovies'))) {
                 const savedMovies = await mainApi.getSavedMovies();
@@ -210,16 +211,27 @@ const App = () => {
                 )
             })
             setSavedMovies(savedMovies);
-            if (checkboxState === true) {
-                const shortSavedMovies = savedMovies.filter((movie) => movie.duration <= cardsConstants.SHORT_MOVIE_DURATION
-                );
-                setSavedMovies(shortSavedMovies);
-            } else {
-                setSavedMovies(savedMovies)
+            if (checkboxState === "true") {
+                const shortMovies = savedMovies.filter((movie) => movie.duration <= cardsConstants.SHORT_MOVIE_DURATION);
+                setSavedMovies(shortMovies);
             }
+            setIsSuccess(true)
         } catch (err) {
             console.log(`Ошибка при поиске фильмов: ${err}`);
+            setErrorText(`Ошибка при поиске фильмов: ${err}`)
+            setIsSuccess(false)
+        } finally {
+            setTimeout(() => {
+                setIsLoading(false)
+            }, 500)
         }
+    }
+
+
+    const savedMoviesCheckboxChange = (isChecked) => {
+        const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+        const filteredSavedMovies = isChecked ? savedMovies.filter((movie) => movie.duration <= cardsConstants.SHORT_MOVIE_DURATION) : savedMovies;
+        setSavedMovies(filteredSavedMovies);
     }
 
     const onSaveMovie = async (movie) => {
@@ -306,7 +318,6 @@ const App = () => {
                                 isBurgerMenuOpen={isBurgerMenuOpen}
                                 toggleBurgerMenu={toggleBurgerMenu}
                                 onCheckboxChange={onCheckboxChange}
-                                checkboxState={checkboxState}
                                 onSaveMovie={onSaveMovie}
                                 onDeleteMovie={onDeleteMovie}
                             />
@@ -324,6 +335,9 @@ const App = () => {
                                 isBurgerMenuOpen={isBurgerMenuOpen}
                                 toggleBurgerMenu={toggleBurgerMenu}
                                 onDeleteMovie={onDeleteMovie}
+                                onCheckboxChange={savedMoviesCheckboxChange}
+                                errorText={errorText}
+                                isSuccess={isSuccess}
                             />
                         }
                     />
@@ -342,14 +356,17 @@ const App = () => {
                                 isInfoTooltipOpen={isInfoTooltipOpen}
                                 closeInfoTooltip={closeInfoTooltip}
                                 isSuccess={isSuccess}
+                                infoTooltipText={infoTooltipText}
                             />}
                     />
                     <Route
                         path="/signup"
                         element={
-                            <Register
+                            <ProtectedRoute
+                                element={Register}
                                 onSignUp={onSignUp}
                                 isLoading={isLoading}
+                                isLoggedIn={!isLoggedIn}
                             />
                         }
 
@@ -357,9 +374,12 @@ const App = () => {
                     <Route
                         path="/signin"
                         element={
-                            <Login
+                            <ProtectedRoute
+                                element={Login}
                                 onSignIn={onSignIn}
                                 isLoading={isLoading}
+                                isLoggedIn={!isLoggedIn}
+                                errorText={errorText}
                             />
                         }
                     />

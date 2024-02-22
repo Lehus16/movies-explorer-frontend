@@ -40,7 +40,6 @@
     background-color: rgba(255, 104, 56, 1);
     padding: 13px 0 15px;
     color: rgba(255, 255, 255, 1);
-    margin-top: 156px;
     font-size: 14px;
     line-height: 16.94px;
     cursor: pointer;
@@ -125,6 +124,15 @@
 
 .login__link:hover {
     opacity: .8;
+}
+
+.login__error-text {
+    font-size: 12px;
+    line-height: 14.52px;
+    color: rgba(238, 52, 101, 1);
+    margin-top: calc(156px - 20px - 10px);
+    margin-bottom: 10px;
+    height: 20px;
 }
 
 

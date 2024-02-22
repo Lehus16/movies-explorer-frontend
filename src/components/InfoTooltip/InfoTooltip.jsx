@@ -7,7 +7,7 @@ import closeIcon from '../../images/closeIcon.svg'
 
 function InfoTooltip({
     isSuccess,
-    errorText,
+    infoTooltipText,
     closeInfoTooltip,
     isInfoTooltipOpen }) {
     return (
@@ -27,7 +27,7 @@ function InfoTooltip({
                     src={isSuccess ? success : failure}
                     alt={isSuccess ? 'Иконка ОК' : 'Иконка ошибки'} />
                 <p className='info-tooltip__text'>
-                    {errorText}
+                    {infoTooltipText}
                 </p>
             </div>
         </div>

@@ -7,7 +7,7 @@ import MyInput from '../MyInput/MyInput.jsx';
 import useFormValidation from '../../hooks/useFormValidation.js';
 
 
-const Login = ({ onSignIn }) => {
+const Login = ({ onSignIn, errorText }) => {
 
     const { values, errors, isFormValid, handleChange } = useFormValidation();
 
@@ -61,6 +61,7 @@ const Login = ({ onSignIn }) => {
                             autoComplete: "off"
                         }
                     } />
+                    <span className="login__error-text">{errorText}</span>
                     <button
                         className={`login__button ${!isFormValid ? "login__button_unactive" : ""}`}
                         type='submit'

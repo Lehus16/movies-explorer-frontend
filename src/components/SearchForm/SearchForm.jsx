@@ -8,31 +8,34 @@ import { useLocation } from 'react-router-dom';
 function SearchForm({
     onSearchMovies,
     onCheckboxChange,
-    checkboxState,
-    searhSavedMovies
+    searhSavedMovies,
+    isLoading,
+    errorText
 }) {
 
     const location = useLocation();
 
     const [queryText, setQueryText] = useState('');
-    const [checkboxValue, setCheckboxValue] = useState(checkboxState);
+    const [checkboxValue, setCheckboxValue] = useState(false);
+    const [savedMoviesCheckboxValue, setSavedMoviesCheckboxValue] = useState(false);
 
     useEffect(() => {
+        const checkboxState = localStorage.getItem('shortMoviesCheckbox');
         if (location.pathname === '/movies') {
             const moviesQuery = localStorage.getItem('moviesQuery')
             if (moviesQuery) {
                 setQueryText(moviesQuery);
             }
+            setCheckboxValue(checkboxState === 'true');
         }
-    }, [location.pathname]);
+    }, [location.pathname, checkboxValue]);
 
     const onSubmitFunc = function (event) {
         event.preventDefault();
         if (location.pathname === '/movies') {
-            localStorage.setItem('moviesQuery', queryText);
             onSearchMovies(queryText)
         } else {
-            searhSavedMovies(queryText, checkboxValue);
+            searhSavedMovies(queryText, savedMoviesCheckboxValue);
             setQueryText('');
         }
     }
@@ -47,22 +50,26 @@ function SearchForm({
                     placeholder='Фильм'
                     onChange={(event) => setQueryText(event.target.value)}
                     value={queryText || ''}
+                    disabled={isLoading}
                 />
                 <button
                     onClick={onSubmitFunc}
                     className='search-form__submit-button'
-                    type='submit'>
+                    type='submit'
+                    disabled={isLoading}>
                     <img
                         className='search-form__find-icon'
                         src={findIcon}
                         alt='Кнопка поиска фильмов' />
                 </button>
             </form>
+            <span className='search-form__error'>{errorText}</span>
             <FilterCheckbox
                 onCheckboxChange={onCheckboxChange}
                 checkboxValue={checkboxValue}
-                setCheckboxValue={setCheckboxValue}
-
+                isLoading={isLoading}
+                savedMoviesCheckbox={savedMoviesCheckboxValue}
+                setSavedMoviesCheckbox={setSavedMoviesCheckboxValue}
 
             />
         </div>

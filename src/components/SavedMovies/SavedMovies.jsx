@@ -8,14 +8,18 @@ import Footer from "../Footer/Footer.jsx";
 function SavedMovies({
     movies,
     isLoggedIn,
+    isLoading,
     toggleBurgerMenu,
     isBurgerMenuOpen,
     onDeleteMovie,
     searhSavedMovies,
+    onCheckboxChange,
+    errorText,
+    isSuccess
 }) {
     return (
         <>
-        
+
             <Header
                 toggleBurgerMenu={toggleBurgerMenu}
                 isBurgerMenuOpen={isBurgerMenuOpen}
@@ -23,12 +27,15 @@ function SavedMovies({
             <main>
                 <SearchForm
                     searhSavedMovies={searhSavedMovies}
-
+                    onCheckboxChange={onCheckboxChange}
+                    isLoading={isLoading}
+                    errorText={errorText}
                 />
                 <MoviesCardList
                     onDeleteMovie={onDeleteMovie}
                     movies={movies}
-
+                    isLoading={isLoading}
+                    isSuccess={isSuccess}
                 />
             </main>
             <Footer />
