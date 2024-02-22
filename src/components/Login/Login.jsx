@@ -7,7 +7,11 @@ import MyInput from '../MyInput/MyInput.jsx';
 import useFormValidation from '../../hooks/useFormValidation.js';
 
 
-const Login = ({ onSignIn, errorText }) => {
+const Login = ({
+    onSignIn,
+    errorText,
+    isLoading
+}) => {
 
     const { values, errors, isFormValid, handleChange } = useFormValidation();
 
@@ -42,7 +46,8 @@ const Login = ({ onSignIn, errorText }) => {
                             labelclassname: "login__label",
                             labelvalue: "E-mail",
                             required: true,
-                            autoComplete: "off"
+                            autoComplete: "off",
+                            disabled: isLoading
                         }
                     } />
                     <MyInput props={
@@ -58,14 +63,15 @@ const Login = ({ onSignIn, errorText }) => {
                             labelclassname: "login__label",
                             labelvalue: "Пароль",
                             required: true,
-                            autoComplete: "off"
+                            autoComplete: "off",
+                            disabled: isLoading
                         }
                     } />
                     <span className="login__error-text">{errorText}</span>
                     <button
                         className={`login__button ${!isFormValid ? "login__button_unactive" : ""}`}
                         type='submit'
-                        disabled={!isFormValid}>
+                        disabled={!isFormValid && isLoading}>
                         <p>Войти</p>
                     </button>
                 </MyForm>

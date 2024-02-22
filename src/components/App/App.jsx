@@ -81,7 +81,7 @@ const App = () => {
             }
         } catch (err) {
             console.log(`Ошибка регистрации: ${err}`);
-            setErrorText('Такой пользователь уже существует');
+            setErrorText('Ошибка регистрации. Попробуйте еще раз.');
         } finally {
             setIsLoading(false)
         }
@@ -101,7 +101,7 @@ const App = () => {
             }
         } catch (err) {
             console.log(`Ошибка авторизации: ${err}`);
-            setErrorText('Неправильные почта или пароль');
+            setErrorText('Ошибка авторизации. Попробуйте ещё раз.');
         } finally {
             setTimeout(() => {
                 setIsLoading(false);
@@ -367,6 +367,7 @@ const App = () => {
                                 onSignUp={onSignUp}
                                 isLoading={isLoading}
                                 isLoggedIn={!isLoggedIn}
+                                errorText={errorText}
                             />
                         }
 

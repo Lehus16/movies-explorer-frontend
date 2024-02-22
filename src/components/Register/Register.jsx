@@ -5,7 +5,7 @@ import MyInput from '../MyInput/MyInput.jsx';
 import Logo from '../Logo/Logo.jsx';
 import { Link } from 'react-router-dom';
 import useFormValidation from '../../hooks/useFormValidation.js';
-function Register({ onSignUp }) {
+function Register({ onSignUp, errorText }) {
 
     const { values, errors, isFormValid, handleChange } = useFormValidation();
 
@@ -79,6 +79,7 @@ function Register({ onSignUp }) {
                             onChange: handleInputChange
                         }
                     } />
+                    <span className='register__error-text'>{errorText}</span>
                     <button
                         className={`register__button ${!isFormValid ? 'register__button_unactive' : ''}`}
                         type="submit"
