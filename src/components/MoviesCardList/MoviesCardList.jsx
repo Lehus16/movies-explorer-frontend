@@ -25,9 +25,11 @@ function MoviesCardList({
 
 
     // Функция для проверки сохранена ли карточка
-    const isSavedMovie = (savedMovies, movie) => {
-        return location.pathname === '/movies' ? savedMovies.find((savedMovie) => savedMovie.movieId === movie.id) : false
-    }
+    const isSavedMovie = (movie) => {
+        const savedMoviesFromStorage = JSON.parse(localStorage.getItem('savedMovies'));
+        return location.pathname === '/movies' ? savedMoviesFromStorage.find((savedMovie) => savedMovie.movieId === movie.id) : false
+    };
+
 
     // Функция ресайза окна для определения количества карточек
     const rezizeWindow = () => {
@@ -41,7 +43,7 @@ function MoviesCardList({
         }
     };
     // Делаем debounced функцию чтобы подгружать карточки не чаще чем раз в 100 миллисекунд
-    const debouncedResizeWindow = useDebouncedFunction(rezizeWindow, 200);
+    const debouncedResizeWindow = useDebouncedFunction(rezizeWindow, 100);
 
     // Вешаем событие на изменение размера окна
     useEffect(() => {
@@ -81,7 +83,7 @@ function MoviesCardList({
                                         card={card}
                                         onSaveMovie={onSaveMovie}
                                         onDeleteMovie={onDeleteMovie}
-                                        isSaved={isSavedMovie(savedMovies, card)}
+                                        isSaved={isSavedMovie(card)}
                                         savedMovies={savedMovies}
 
                                     />)}

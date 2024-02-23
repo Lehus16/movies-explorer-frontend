@@ -50,6 +50,7 @@ function Movies({
                     onCheckboxChange={onCheckboxChange}
                     onSearchMovies={onSearchMovies}
                     isLoading={isLoading}
+                    errorText={errorText}
                 />
                 <MoviesCardList
                     errorText={errorText}

@@ -5,7 +5,10 @@ import MyInput from '../MyInput/MyInput.jsx';
 import Logo from '../Logo/Logo.jsx';
 import { Link } from 'react-router-dom';
 import useFormValidation from '../../hooks/useFormValidation.js';
-function Register({ onSignUp, errorText }) {
+function Register({
+    onSignUp,
+    errorText,
+    isLoading }) {
 
     const { values, errors, isFormValid, handleChange } = useFormValidation();
 
@@ -44,7 +47,8 @@ function Register({ onSignUp, errorText }) {
                             required: true,
                             autoComplete: 'off',
                             type: 'text',
-                            onChange: handleInputChange
+                            onChange: handleInputChange,
+                            disabled: isLoading
                         }
                     } />
                     <MyInput props={
@@ -60,7 +64,8 @@ function Register({ onSignUp, errorText }) {
                             required: true,
                             autoComplete: 'off',
                             type: 'email',
-                            onChange: handleInputChange
+                            onChange: handleInputChange,
+                            disabled: isLoading
                         }
                     } />
                     <MyInput props={
@@ -76,15 +81,16 @@ function Register({ onSignUp, errorText }) {
                             required: true,
                             autoComplete: 'off',
                             type: 'password',
-                            onChange: handleInputChange
+                            onChange: handleInputChange,
+                            disabled: isLoading
                         }
                     } />
                     <span className='register__error-text'>{errorText}</span>
                     <button
                         className={`register__button ${!isFormValid ? 'register__button_unactive' : ''}`}
                         type="submit"
-                        disabled={!isFormValid}>
-                        <p>Зарегистрироваться</p>
+                        disabled={!isFormValid || isLoading}>
+                        <p>{isLoading ? 'Регистрация...' : 'Зарегистрироваться'}</p>
                     </button>
                 </MyForm>
                 <div className='register__signin-container'>

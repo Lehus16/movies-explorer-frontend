@@ -126,11 +126,11 @@ const App = () => {
     const onPatchUserInfo = async (values) => {
         setErrorText('')
         setIsLoading(true)
+        setIsSuccess(true)
         try {
             await mainApi.patchUserInfo(values)
                 .then((info) => {
                     setUserInfo(info);
-                    setIsSuccess(true)
                     setInfoTooltipText('Данные успешно обновлены');
                     setIsInfoTooltipOpen(true)
                 });
@@ -237,10 +237,12 @@ const App = () => {
     const onSaveMovie = async (movie) => {
         try {
             if (!savedMovies.some((savedMovie) => savedMovie.movieId === movie.id)) {
-                const movieToSave = await mainApi.saveMovie(movie);
-                const allMoviesToSave = [movieToSave, ...savedMovies];
-                setSavedMovies(allMoviesToSave);
-                localStorage.setItem('savedMovies', JSON.stringify(allMoviesToSave));
+                await mainApi.saveMovie(movie)
+                    .then((movie) => {
+                        const allMoviesToSave = [movie, ...savedMovies];
+                        setSavedMovies(allMoviesToSave);
+                        localStorage.setItem('savedMovies', JSON.stringify(allMoviesToSave));
+                    });
             }
         } catch (err) {
             console.log(`Ошибка сохранения фильма: ${err}`);
@@ -251,15 +253,19 @@ const App = () => {
         try {
             if (movie._id) {
                 await mainApi.deleteMovie(movie._id)
-                const allMoviesAfterDelete = savedMovies.filter((savedMovie) => savedMovie._id !== movie._id);
-                setSavedMovies(allMoviesAfterDelete);
-                localStorage.setItem('savedMovies', JSON.stringify(allMoviesAfterDelete));
+                    .then(() => {
+                        const allMoviesAfterDelete = JSON.parse(localStorage.getItem('savedMovies')).filter((savedMovie) => savedMovie._id !== movie._id);
+                        localStorage.setItem('savedMovies', JSON.stringify(allMoviesAfterDelete));
+                        setSavedMovies(savedMovies.filter((savedMovie) => savedMovie._id !== movie._id));
+                    })
             } else {
                 const movieToDeleteId = savedMovies.find((savedMovie) => savedMovie.movieId === movie.id);
-                await mainApi.deleteMovie(movieToDeleteId._id);
-                const allMoviesAfterDelete = savedMovies.filter((savedMovie) => savedMovie._id !== movieToDeleteId._id);
-                setSavedMovies(allMoviesAfterDelete);
-                localStorage.setItem('savedMovies', JSON.stringify(allMoviesAfterDelete));
+                await mainApi.deleteMovie(movieToDeleteId._id)
+                    .then(() => {
+                        const allMoviesAfterDelete = savedMovies.filter((savedMovie) => savedMovie._id !== movieToDeleteId._id);
+                        setSavedMovies(allMoviesAfterDelete);
+                        localStorage.setItem('savedMovies', JSON.stringify(allMoviesAfterDelete));
+                    });
             }
         } catch (err) {
             console.log(`Ошибка удаления фильма: ${err}`);
@@ -272,6 +278,10 @@ const App = () => {
         // document.body.classList.remove('no-scroll');
     }
 
+
+    useEffect(() => {
+        setErrorText('');
+    }, [location.pathname]);
 
 
     useEffect(() => {

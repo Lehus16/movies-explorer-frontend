@@ -27,6 +27,8 @@ function SearchForm({
                 setQueryText(moviesQuery);
             }
             setCheckboxValue(checkboxState === 'true');
+        } else {
+            setQueryText('');
         }
     }, [location.pathname, checkboxValue]);
 
@@ -36,7 +38,6 @@ function SearchForm({
             onSearchMovies(queryText)
         } else {
             searhSavedMovies(queryText, savedMoviesCheckboxValue);
-            setQueryText('');
         }
     }
     return (

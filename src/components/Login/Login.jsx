@@ -71,7 +71,7 @@ const Login = ({
                     <button
                         className={`login__button ${!isFormValid ? "login__button_unactive" : ""}`}
                         type='submit'
-                        disabled={!isFormValid && isLoading}>
+                        disabled={!isFormValid || isLoading}>
                         <p>Войти</p>
                     </button>
                 </MyForm>

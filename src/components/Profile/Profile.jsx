@@ -66,6 +66,7 @@ function Profile({
                             labelclassname: 'profile__label',
                             labelvalue: 'Имя:',
                             autoComplete: 'off',
+                            disabled: isLoading
                         }} />
                     </div>
                     <div className='profile__input-container'>
@@ -80,14 +81,15 @@ function Profile({
                             spanclassname: 'profile__validation-text',
                             spanvalue: errors.email,
                             labelclassname: 'profile__label',
-                            labelvalue: 'E-mail:'
+                            labelvalue: 'E-mail:',
+                            disabled: isLoading
                         }} />
                     </div>
                     <span className='profile__error'>{errorText}</span>
                     <button
                         className={`profile__button`}
                         type='submit'
-                        disabled={!isFormValid || (values.name === currentUser.name && values.email === currentUser.email)}>
+                        disabled={!isFormValid || (values.name === currentUser.name && values.email === currentUser.email) || isLoading}>
                         <p>{isLoading ? 'Сохранение...' : 'Редактировать'}</p>
                     </button>
                     <button
