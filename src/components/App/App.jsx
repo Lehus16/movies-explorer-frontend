@@ -211,7 +211,7 @@ const App = () => {
                 )
             })
             setSavedMovies(savedMovies);
-            if (checkboxState === "true") {
+            if (checkboxState === true) {
                 const shortMovies = savedMovies.filter((movie) => movie.duration <= cardsConstants.SHORT_MOVIE_DURATION);
                 setSavedMovies(shortMovies);
             }
@@ -228,8 +228,16 @@ const App = () => {
     }
 
 
-    const savedMoviesCheckboxChange = (isChecked) => {
-        const savedMovies = JSON.parse(localStorage.getItem('savedMovies'));
+    const savedMoviesCheckboxChange = (queryText, isChecked) => {
+        const savedMoviesFromStorage = JSON.parse(localStorage.getItem('savedMovies'));
+        const query = queryText.toLowerCase().trim();
+        const savedMovies = savedMoviesFromStorage.filter((movie) => {
+            const movieNameRU = movie.nameRU.toLowerCase().trim();
+            const movieNameEN = movie.nameEN.toLowerCase().trim();
+            return (
+                movieNameRU.includes(query) || movieNameEN.includes(query)
+            )
+        })
         const filteredSavedMovies = isChecked ? savedMovies.filter((movie) => movie.duration <= cardsConstants.SHORT_MOVIE_DURATION) : savedMovies;
         setSavedMovies(filteredSavedMovies);
     }
@@ -239,7 +247,8 @@ const App = () => {
             if (!savedMovies.some((savedMovie) => savedMovie.movieId === movie.id)) {
                 await mainApi.saveMovie(movie)
                     .then((movie) => {
-                        const allMoviesToSave = [movie, ...savedMovies];
+                        const allSavedMoviesFromStorage = JSON.parse(localStorage.getItem('savedMovies'));
+                        const allMoviesToSave = [movie, ...allSavedMoviesFromStorage];
                         setSavedMovies(allMoviesToSave);
                         localStorage.setItem('savedMovies', JSON.stringify(allMoviesToSave));
                     });

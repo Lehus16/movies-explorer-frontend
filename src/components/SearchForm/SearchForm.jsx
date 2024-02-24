@@ -37,6 +37,7 @@ function SearchForm({
         if (location.pathname === '/movies') {
             onSearchMovies(queryText)
         } else {
+            console.log(savedMoviesCheckboxValue);
             searhSavedMovies(queryText, savedMoviesCheckboxValue);
         }
     }
@@ -71,6 +72,7 @@ function SearchForm({
                 isLoading={isLoading}
                 savedMoviesCheckbox={savedMoviesCheckboxValue}
                 setSavedMoviesCheckbox={setSavedMoviesCheckboxValue}
+                queryText={queryText}
 
             />
         </div>

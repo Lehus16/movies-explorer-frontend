@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom';
 import './FilterCheckbox.css'
-function FilterCheckbox({ onCheckboxChange, isLoading, savedMoviesCheckbox, setSavedMoviesCheckbox }) {
+function FilterCheckbox({ onCheckboxChange, isLoading, savedMoviesCheckbox, setSavedMoviesCheckbox, queryText }) {
 
 
     const location = useLocation();
@@ -19,7 +19,7 @@ function FilterCheckbox({ onCheckboxChange, isLoading, savedMoviesCheckbox, setS
             onCheckboxChange(!checkboxChecked);
         } else if (location.pathname === '/saved-movies') {
             setSavedMoviesCheckbox(!savedMoviesCheckbox);
-            onCheckboxChange(!savedMoviesCheckbox);
+            onCheckboxChange(queryText, !savedMoviesCheckbox);
         }
     }
 
