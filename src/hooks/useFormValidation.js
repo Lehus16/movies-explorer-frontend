@@ -44,10 +44,10 @@ const useFormValidation = () => {
         setisFormValid(form ? form.checkValidity() : false);
     }
 
-    const resetFormValues = useCallback(() => {
-        setValues({});
-        setErrors({});
-        setisFormValid(false);
+    const resetFormValues = useCallback((values = {}, errors = {}, isFormValid = false) => {
+        setValues(values);
+        setErrors(errors);
+        setisFormValid(isFormValid);
     }, [setValues, setErrors, setisFormValid]);
 
 

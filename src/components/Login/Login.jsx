@@ -7,31 +7,30 @@ import MyInput from '../MyInput/MyInput.jsx';
 import useFormValidation from '../../hooks/useFormValidation.js';
 
 
-const Login = () => {
+const Login = ({
+    onSignIn,
+    errorText,
+    isLoading
+}) => {
 
     const { values, errors, isFormValid, handleChange } = useFormValidation();
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (isFormValid) {
-            console.log(values);
-        }
+        onSignIn(values)
     }
 
     const handleInputChange = (event) => {
         handleChange(event)
     }
     return (
-        <section className="login">
+        <main className="login">
             <div className='login__form-container'>
                 <Logo className={"login__logo"} />
                 <MyForm props={{
                     className: "login__form",
                     titleclassname: "login__title",
-                    buttonclassname: `login__button ${!isFormValid ? "login__button_unactive" : ""}`,
-                    buttonvalue: "Войти",
                     titlevalue: "Рады видеть!",
-                    disabled: !isFormValid,
                     onSubmit: handleSubmit
                 }}>
                     <MyInput props={
@@ -47,7 +46,8 @@ const Login = () => {
                             labelclassname: "login__label",
                             labelvalue: "E-mail",
                             required: true,
-                            autoComplete: "off"
+                            autoComplete: "off",
+                            disabled: isLoading
                         }
                     } />
                     <MyInput props={
@@ -63,9 +63,17 @@ const Login = () => {
                             labelclassname: "login__label",
                             labelvalue: "Пароль",
                             required: true,
-                            autoComplete: "off"
+                            autoComplete: "off",
+                            disabled: isLoading
                         }
                     } />
+                    <span className="login__error-text">{errorText}</span>
+                    <button
+                        className={`login__button ${!isFormValid ? "login__button_unactive" : ""}`}
+                        type='submit'
+                        disabled={!isFormValid || isLoading}>
+                        <p>Войти</p>
+                    </button>
                 </MyForm>
                 <div className="login__link-container">
                     <p className="login__link-text">
@@ -77,7 +85,8 @@ const Login = () => {
                 </div>
             </div>
 
-        </section>
+
+        </main>
     )
 }
 

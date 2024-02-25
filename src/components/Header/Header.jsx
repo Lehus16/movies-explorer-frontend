@@ -7,20 +7,17 @@ import burgerMenuIcon from "../../images/burgerMenuIcon.svg";
 
 import './Header.css';
 
-const Header = ({ loggedIn }) => {
+const Header = ({ isLoggedIn, toggleBurgerMenu, isBurgerMenuOpen }) => {
 
     const location = useLocation();
 
-    const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-    const toggleBurgerMenu = () => {
-        setIsBurgerMenuOpen(!isBurgerMenuOpen);
-    }
+
 
     return (
         <header>
             {location.pathname === "/" ?
                 (<div className="header header_path_main" >
-                    {!loggedIn ?
+                    {!isLoggedIn ?
                         (<div className="header__container header__unauth-container">
                             <Logo className={"header__logo"} />
                             <nav>
@@ -30,7 +27,7 @@ const Header = ({ loggedIn }) => {
                                 <Link to="/signin" className="header__sign-in-button">
                                     Войти
                                 </Link>
-                                
+
                             </nav>
                         </div>)
                         : (<div className="header__container header__auth-container">
@@ -88,7 +85,7 @@ const Header = ({ loggedIn }) => {
             }
             <Navigation
                 isBurgerMenuOpen={isBurgerMenuOpen}
-                setIsBurgerMenuOpen={setIsBurgerMenuOpen}
+                toggleBurgerMenu={toggleBurgerMenu}
             />
         </header>
 

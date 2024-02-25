@@ -9,11 +9,27 @@ import useDebouncedFunction from '../../hooks/useDebouncedFunction';
 
 
 
-function MoviesCardList({ cards, isLoading, shortMovies, isMoviesShort }) {
-
+function MoviesCardList({
+    movies,
+    savedMovies,
+    isLoading,
+    errorText,
+    isSuccess,
+    onSaveMovie,
+    onDeleteMovie
+}) {
 
     const [cardsCount, setCardsCount] = useState(cardsConstants.ZERO);
+
     const location = useLocation();
+
+
+    // Функция для проверки сохранена ли карточка
+    const isSavedMovie = (movie) => {
+        const savedMoviesFromStorage = JSON.parse(localStorage.getItem('savedMovies'));
+        return location.pathname === '/movies' ? savedMoviesFromStorage.find((savedMovie) => savedMovie.movieId === movie.id) : false
+    };
+
 
     // Функция ресайза окна для определения количества карточек
     const rezizeWindow = () => {
@@ -27,7 +43,7 @@ function MoviesCardList({ cards, isLoading, shortMovies, isMoviesShort }) {
         }
     };
     // Делаем debounced функцию чтобы подгружать карточки не чаще чем раз в 100 миллисекунд
-    const debouncedResizeWindow = useDebouncedFunction(rezizeWindow, 200);
+    const debouncedResizeWindow = useDebouncedFunction(rezizeWindow, 100);
 
     // Вешаем событие на изменение размера окна
     useEffect(() => {
@@ -55,20 +71,40 @@ function MoviesCardList({ cards, isLoading, shortMovies, isMoviesShort }) {
 
     return (
         <section className='movies-card-list'>
-            {isLoading
-                ? <Preloader />
-                : location.pathname === "/movies"
-                    ? <div className='movies-card-list__container'>
-                        {isMoviesShort ? shortMovies.slice(cardsConstants.ZERO, cardsCount).map((card) => <MoviesCard key={card.movieId} card={card} />)
-                            : cards.slice(cardsConstants.ZERO, cardsCount).map((card) => <MoviesCard
-                                key={card.movieId} card={card} />)}
-                    </div>
-                    : <div className='movies-card-list__container movies-card-list__container_type_saved'>
-                        {isMoviesShort ? shortMovies.slice(cardsConstants.ZERO, cardsCount).map((card) => <MoviesCard key={card.movieId} card={card} />)
-                            : cards.slice(cardsConstants.ZERO, cardsCount).map((card) => <MoviesCard
-                                key={card.movieId} card={card} />)}
-                    </div>}
-            {location.pathname === '/movies' &&
+            {isLoading ?
+                <Preloader />
+                : <>
+                    {movies.length > cardsConstants.ZERO ?
+                        location.pathname === "/movies"
+                            ? <div className='movies-card-list__container'>
+                                {movies.slice(cardsConstants.ZERO, cardsCount)
+                                    .map((card) => <MoviesCard
+                                        key={card.movieId}
+                                        card={card}
+                                        onSaveMovie={onSaveMovie}
+                                        onDeleteMovie={onDeleteMovie}
+                                        isSaved={isSavedMovie(card)}
+                                        savedMovies={savedMovies}
+
+                                    />)}
+                            </div>
+                            : <div className='movies-card-list__container movies-card-list__container_type_saved'>
+                                {movies.slice(cardsConstants.ZERO, cardsCount)
+                                    .map((card) => <MoviesCard
+                                        key={card.movieId}
+                                        card={card}
+                                        onDeleteMovie={onDeleteMovie}
+                                    />)}
+                            </div>
+                        :
+                        <p className='movies-card-list__error'>
+                            {isSuccess ? 'Ничего не найдено' : errorText}
+                        </p>
+                    }
+                </>
+            }
+            {
+                location.pathname === '/movies' && movies.length > cardsCount &&
                 <div className='movies-card-list__button-container'>
                     <button onClick={onShowMoreMovies} className='movies-card-list__button' type='button'>
                         Еще

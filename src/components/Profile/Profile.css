@@ -76,17 +76,22 @@
     border: none;
     background-color: inherit;
     cursor: pointer;
-    margin: 215px 0 16px;
+    margin: 16px 0;
     font-size: 13px;
     line-height: 15.73px;
 }
 
-.profile__button_unactive:hover {
-    opacity: 1;
-    cursor: default;
+.profile__error {
+    color: rgba(238, 52, 101, 1);
+    height: 20px;
+    font-size: 10px;
+    line-height: 12px;
+    margin-top: calc(215px - 20px - 16px);
+    text-align: center;
 }
 
-.profile__button:last-of-type {
+
+.profile__button_type_signout {
     color: rgba(238, 52, 101, 1);
     margin: 0;
 }
@@ -94,6 +99,7 @@
 .profile__button:hover {
     opacity: .8;
 }
+
 
 .profile__validation-text {
     width: 100%;
@@ -112,11 +118,15 @@
 
 @media screen and (max-width: 768px) {
     .profile__title {
-        margin: 236px 0 96px;
+        margin: 200px 0 96px;
     }
 
     .profile__button {
         margin: 210px 0 16px;
+    }
+
+    .profile__button_type_signout {
+        margin-top: 0px;
     }
 }
 
@@ -128,13 +138,17 @@
     }
 
     .profile__button {
-        margin: 379px 0 16px;
+        margin: 210px 0 16px;
         font-size: 12px;
         line-height: 14.52px;
     }
 
     .profile__input-container {
         width: 310px;
+    }
+
+    .profile__button_type_signout {
+        margin-top: 0px;
     }
 
 }

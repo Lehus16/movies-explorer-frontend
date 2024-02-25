@@ -5,7 +5,10 @@ import MyInput from '../MyInput/MyInput.jsx';
 import Logo from '../Logo/Logo.jsx';
 import { Link } from 'react-router-dom';
 import useFormValidation from '../../hooks/useFormValidation.js';
-function Register() {
+function Register({
+    onSignUp,
+    errorText,
+    isLoading }) {
 
     const { values, errors, isFormValid, handleChange } = useFormValidation();
 
@@ -15,12 +18,12 @@ function Register() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (isFormValid) {
-            console.log(values);
-        }
+        onSignUp(values);
     }
+
+
     return (
-        <section className='register'>
+        <main className='register'>
             <div className='register__form-container'>
                 <Logo className={'register__logo'} />
                 <MyForm props={
@@ -28,9 +31,6 @@ function Register() {
                         className: "register__form",
                         titleclassname: 'register__title',
                         titlevalue: 'Добро пожаловать!',
-                        buttonclassname: `register__button ${!isFormValid ? 'register__button_unactive' : ''}`,
-                        disabled: !isFormValid,
-                        buttonvalue: 'Зарегистрироваться',
                         onSubmit: handleSubmit
                     }
                 }>
@@ -47,7 +47,8 @@ function Register() {
                             required: true,
                             autoComplete: 'off',
                             type: 'text',
-                            onChange: handleInputChange
+                            onChange: handleInputChange,
+                            disabled: isLoading
                         }
                     } />
                     <MyInput props={
@@ -63,7 +64,8 @@ function Register() {
                             required: true,
                             autoComplete: 'off',
                             type: 'email',
-                            onChange: handleInputChange
+                            onChange: handleInputChange,
+                            disabled: isLoading
                         }
                     } />
                     <MyInput props={
@@ -79,9 +81,17 @@ function Register() {
                             required: true,
                             autoComplete: 'off',
                             type: 'password',
-                            onChange: handleInputChange
+                            onChange: handleInputChange,
+                            disabled: isLoading
                         }
                     } />
+                    <span className='register__error-text'>{errorText}</span>
+                    <button
+                        className={`register__button ${!isFormValid ? 'register__button_unactive' : ''}`}
+                        type="submit"
+                        disabled={!isFormValid || isLoading}>
+                        <p>{isLoading ? 'Регистрация...' : 'Зарегистрироваться'}</p>
+                    </button>
                 </MyForm>
                 <div className='register__signin-container'>
                     <p className='register__signin-text'>
@@ -92,7 +102,7 @@ function Register() {
                     </Link>
                 </div>
             </div>
-        </section>
+        </main>
     )
 }
 
